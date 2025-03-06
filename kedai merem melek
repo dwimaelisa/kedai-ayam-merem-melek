@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Antrian Ayam Merem Melek</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: pink;
+      color: black;
+    }
+    .container {
+      display: grid;
+      grid-template-areas: 
+        "header header"
+        "left right"
+        "left bottom";
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: auto 1fr auto;
+      gap: 10px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      grid-area: header;
+      text-align: center;
+      padding: 20px;
+      border: 2px solid black;
+      background-color: white;
+      color: black;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    .header p {
+      margin: 5px 0 0;
+      font-style: italic;
+    }
+    .header img {
+      width: 150px;
+      margin-top: 10px;
+    }
+    .left {
+      grid-area: left;
+      text-align: center;
+      padding: 20px;
+      border: 2px solid black;
+      background-color: white;
+      color: black;
+    }
+    .left .queue-number {
+      font-size: 4rem;
+      margin: 20px 0;
+    }
+    .left button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: black;
+      color: white;
+      font-weight: bold;
+    }
+    .right {
+      grid-area: right;
+      padding: 20px;
+      border: 2px solid black;
+      background-color: white;
+      color: black;
+      text-align: center;
+    }
+    .right h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+    }
+    .menu-item {
+      margin: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .menu-item img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+      border-radius: 5px;
+    }
+    .menu-item span {
+      font-size: 1.2rem;
+    }
+    .menu-item button {
+      margin-left: 10px;
+      padding: 5px 10px;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+    }
+    .menu-item .buy {
+      background-color: blue;
+    }
+    .menu-item .delete {
+      background-color: red;
+    }
+    .bottom {
+      grid-area: bottom;
+      padding: 20px;
+      border: 2px solid black;
+      background-color: white;
+      color: black;
+      text-align: center;
+    }
+    .bottom h2 {
+      margin: 0 0 10px;
+      font-size: 1.5rem;
+    }
+    .order-item.processing {
+      color: blue;
+    }
+    .order-item.complete {
+      color: green;
+    }
+    .qris {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .qris img {
+      width: 150px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>E-ANTRIAN AYAM MEREM MELEK</h1>
+      <p>"Anda sopan kami segan"</p>
+      <img src="logo.jpg" alt="Logo Kedai">
+    </div>
+    <div class="left">
+      <h2>NO ANTRIAN</h2>
+      <div class="queue-number" id="current-number">0</div>
+      <button id="take-number">AMBIL</button>
+      <div>
+        <p>Nama: <span id="customer-name">-</span></p>
+        <p>Note: <span id="customer-note">-</span></p>
+      </div>
+    </div>
+    <div class="right">
+      <h2>MENU MAKAN HARI INI</h2>
+      <div class="menu-item"><img src="ayam bakar .jpg" alt="Ayam Bakar"><span>Ayam Bakar - Rp 20.000</span> <button class="buy">Beli</button> <button class="delete">Hapus</button></div>
+      <div class="menu-item"><img src="ayam goreng.jpg" alt="Ayam Goreng"><span>Ayam Goreng - Rp 18.000</span> <button class="buy">Beli</button> <button class="delete">Hapus</button></div>
+      <div class="menu-item"><img src="ayam geprek .jpg" alt="Ayam Geprek"><span>Ayam Geprek - Rp 15.000</span> <button class="buy">Beli</button> <button class="delete">Hapus</button></div>
+      <div class="menu-item"><img src="soto ayam.jpg" alt="Soto Ayam"><span>Soto Ayam - Rp 12.000</span> <button class="buy">Beli</button> <button class="delete">Hapus</button></div>
+      <div class="menu-item"><img src="gulai ayam.jpg" alt="Gulai Ayam"><span>Gulai Ayam - Rp 22.000</span> <button class="buy">Beli</button> <button class="delete">Hapus</button></div>
+      <div class="menu-item"><img src="ayam rica.jpg" alt="Ayam Rica"><span>Ayam Rica - Rp 20.000</span> <button class="buy">Beli</button> <button class="delete">Hapus</button></div>
+      <div class="menu-item"><img src="stik-ayam.jpg" alt="Stik Ayam"><span>Stik Ayam - Rp 25.000</span> <button class="buy">Beli</button> <button class="delete">Hapus</button></div>
+      <div class="menu-item"><img src="air es.jpg" alt="Air Es"><span>Air Es - Rp 5.000</span> <button class="buy">Beli</button> <button class="delete">Hapus</button></div>
+      <div class="menu-item"><img src="es teh.jpg" alt="Es Teh"><span>Es Teh - Rp 6.000</span> <button class="buy">Beli</button> <button class="delete">Hapus</button></div>
+      <div class="menu-item"><img src="jeruk peras es.jpg" alt="Jeruk Peras Es"><span>Jeruk Peras Es - Rp 8.000</span> <button class="buy">Beli</button> <button class="delete">Hapus</button></div>
+      <div class="menu-item"><img src="jeruk peras panas.jpg" alt="Jeruk Peras Panas"><span>Jeruk Peras Panas - Rp 8.000</span> <button class="buy">Beli</button> <button class="delete">Hapus</button></div>
+    </div>
+    <div class="bottom">
+      <h2>RIWAYAT PESANAN</h2>
+      <ul id="order-history">
+        <li>Belum ada riwayat.</li>
+      </ul>
+      <div class="qris">
+        <h3>Pembayaran QRIS</h3>
+        <img src="qris.jpg" alt="QRIS Code">
+      </div>
+    </div>
+  </div>
+  <script>
+    let currentNumber = 0;
+    const maxNumber = 100;
+
+    const currentNumberDisplay = document.getElementById('current-number');
+    const takeNumberButton = document.getElementById('take-number');
+    const orderHistory = document.getElementById('order-history');
+
+    takeNumberButton.addEventListener('click', () => {
+      if (currentNumber < maxNumber) {
+        const customerName = prompt("Masukkan nama Anda:");
+        const customerNote = prompt("Masukkan catatan pesanan:");
+
+        if (customerName && customerNote) {
+          currentNumber++;
+          currentNumberDisplay.textContent = currentNumber;
+          document.getElementById('customer-name').textContent = customerName;
+          document.getElementById('customer-note').textContent = customerNote;
+
+          const listItem = document.createElement('li');
+          listItem.textContent = `Nomor ${currentNumber} (${customerName}) sedang diproses...`;
+          listItem.className = 'order-item processing';
+          orderHistory.appendChild(listItem);
+
+          setTimeout(() => {
+            listItem.textContent = `Nomor ${currentNumber} (${customerName}) selesai. Segera ambil pesanan Anda.`;
+            listItem.className = 'order-item complete';
+          }, 30000); // 30 detik
+        } else {
+          alert("Nama dan catatan harus diisi.");
+        }
+      } else {
+        alert('Antrian penuh!');
+      }
+    });
+
+    document.querySelectorAll('.buy').forEach(button => {
+      button.addEventListener('click', (event) => {
+        alert('Pesanan telah ditambahkan!');
+      });
+    });
+
+    document.querySelectorAll('.delete').forEach(button => {
+      button.addEventListener('click', (event) => {
+        alert('Pesanan telah dihapus!');
+      });
+    });
+  </script>
+</body>
+</html>
